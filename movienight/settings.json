@@ -1,0 +1,18 @@
+{
+	"MaxMessageCount": 300,
+	"TitleLength": 50,
+	"AdminPassword": "STREAM_KEY",
+	"RegenAdminPass": true,
+	"Bans": [],
+	"StreamKey": "STREAM_KEY",
+	"ListenAddress": ":8089",
+	"ApprovedEmotes": null,
+	"LogLevel": "debug",
+	"LogFile": "movienight.log",
+	"RateLimitChat": 1,
+	"RateLimitNick": 300,
+	"RateLimitColor": 60,
+	"RateLimitAuth": 5,
+	"RateLimitDuplicate": 30,
+	"NoCache": false
+}
