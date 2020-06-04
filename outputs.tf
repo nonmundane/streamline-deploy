@@ -7,8 +7,7 @@ locals {
 resource "local_file" "private_key" {
   sensitive_content = tls_private_key.streamline.private_key_pem
   file_permission   = "0600"
-  filename          = "ssh_${local.public_dns}.pem"
-
+  filename          = "ssh_key.pem"
   count = var.private_key_file ? "1" : "0"
 }
 

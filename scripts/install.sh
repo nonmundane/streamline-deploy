@@ -40,8 +40,7 @@ sudo chmod 755 /usr/local/bin/acme-nginx
 sudo acme-nginx -d $HOSTNAME.$DOMAINNAME
 sudo sed -i "s/HOSTNAME/$HOSTNAME/g" /home/ubuntu/movienight.conf
 sudo sed -i "s/DOMAINNAME/$DOMAINNAME/g" /home/ubuntu/movienight.conf
-sudo cp /home/ubuntu/movienight.conf /etc/nginx/sites-available/movienight.conf
-sudo ln -s /etc/nginx/sites-available/movienight.conf /etc/nginx/sites-enabled/movienight.conf
+sudo cp /home/ubuntu/movienight.conf /etc/nginx/sites-available/default
 sudo systemctl reload nginx
 echo "Nginx and ACME SSL part completed"
 sudo chown -R ubuntu:ubuntu /home/ubuntu

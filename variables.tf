@@ -23,7 +23,7 @@ variable "aws_region" {
 
 variable "instance_type" {
   # this app is network sensitive primarily, a t3.small should run it fine
-  default = "t3.medium"
+  default = "t3.nano"
 }
 
 variable "instance_spot" {
