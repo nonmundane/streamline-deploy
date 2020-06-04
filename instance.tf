@@ -22,7 +22,7 @@ resource "aws_spot_instance_request" "streamline" {
   spot_type              = "one-time"
   wait_for_fulfillment   = true
 
-  ami                         = var.instance_ami == "" ? data.aws_ami.streamline.id : var.instance_ami
+  ami                         = data.aws_ami.streamline.id
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.streamline.key_name
@@ -48,7 +48,7 @@ resource "aws_spot_instance_request" "streamline" {
 }
 
 resource "aws_instance" "streamline" {
-  ami                         = var.instance_ami == "" ? data.aws_ami.streamline.id : var.instance_ami
+  ami                         = data.aws_ami.streamline.id
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.streamline.key_name
