@@ -19,4 +19,8 @@ data "aws_route53_zone" "selected" {
   private_zone = false
 }
 
+data "aws_s3_bucket" "bucket" {
+  bucket = var.bucket
+}
+
 resource "random_uuid" "streamline" {}

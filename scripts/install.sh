@@ -6,7 +6,7 @@ set -e
 # sudo add-apt-repository ppa:longsleep/golang-backports
 apt-get update
 apt-get install -y apt-transport-https ca-certificates curl software-properties-common \
-                   gcc git build-essential golang-go ffmpeg nginx
+                   gcc git build-essential golang-go ffmpeg nginx awscli s3fs
 
 sudo mkdir -p /opt/streamline/manifests
 sudo mkdir -p /opt/streamline/media
@@ -15,7 +15,8 @@ cd /home/ubuntu
 
 export STREAM_KEY=${1}
 export HOSTNAME=${2}
-export DOMAINNAME=${3%?}
+export DOMAINNAME=${3}
+export INSTANCE_NAME=${4}
 
 sudo git -C /opt clone https://github.com/zorchenhimer/MovieNight
 sudo make -C /opt/MovieNight/
@@ -37,7 +38,7 @@ sudo systemctl start movienight
 echo "MovieNight part completed"
 sudo curl -s -L https://github.com/kshcherban/acme-nginx/releases/download/v0.2.1/acme-nginx -o /usr/local/bin/acme-nginx
 sudo chmod 755 /usr/local/bin/acme-nginx
-sudo acme-nginx -d $HOSTNAME.$DOMAINNAME
+#sudo acme-nginx -d $INSTANCE_NAME.$DOMAINNAME
 sudo sed -i "s/HOSTNAME/$HOSTNAME/g" /home/ubuntu/movienight.conf
 sudo sed -i "s/DOMAINNAME/$DOMAINNAME/g" /home/ubuntu/movienight.conf
 sudo cp /home/ubuntu/movienight.conf /etc/nginx/sites-available/default

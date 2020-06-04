@@ -4,6 +4,7 @@ locals {
     hostname   = "${var.hostname}"
     domainname = "${data.aws_route53_zone.selected.name}"
     path       = path.module
+    instance_name = var.instance_name
   }
 }
 
@@ -21,7 +22,7 @@ resource "aws_spot_instance_request" "streamline" {
   spot_price             = var.instance_spot_price
   spot_type              = "one-time"
   wait_for_fulfillment   = true
-
+  iam_instance_profile   = aws_iam_instance_profile.bucket_rw.name
   ami                         = data.aws_ami.streamline.id
   associate_public_ip_address = true
   instance_type               = var.instance_type
@@ -85,7 +86,7 @@ resource "aws_route53_record" "streamline" {
 
 resource "aws_route53_record" "streamline_instance" {
   zone_id = data.aws_route53_zone.selected.zone_id
-  name    = "streamline_instance.${data.aws_route53_zone.selected.name}"
+  name    = "${var.instance_name}.${data.aws_route53_zone.selected.name}"
   type    = "A"
   ttl     = "300"
   records = ["${aws_spot_instance_request.streamline[0].public_ip}"]

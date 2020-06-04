@@ -1,19 +1,26 @@
 variable "hostname" {
   type    = string
-  default = ""
+  default = "streamii"
+}
+variable "instance_name" {
+  type = string
+  default = "streamlineinstance"
 }
 variable "domainname" {
   type    = string
-  default = ""
+  default = "pookflix.com"
 }
-
+variable "bucket" {
+  type    = string
+  default = "pookflix"
+}
 variable "aws_region" {
   default = "us-west-2"
 }
 
 variable "instance_type" {
   # this app is network sensitive primarily, a t3.small should run it fine
-  default = "t3.nano"
+  default = "t3.small"
 }
 
 variable "instance_spot" {
