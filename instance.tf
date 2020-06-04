@@ -26,13 +26,12 @@ resource "aws_spot_instance_request" "streamline" {
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.streamline.key_name
-  #subnet_id                   = data.aws_subnet.streamline.id
   user_data_base64            = base64encode(templatefile("${path.module}/cloud-init/cloud-config.tpl", local.vars))
   security_groups      = [aws_security_group.streamline.name]
 
   root_block_device {
     volume_type           = "gp2"
-    volume_size           = "60"
+    volume_size           = "100"
     delete_on_termination = true
   }
 
@@ -52,7 +51,6 @@ resource "aws_instance" "streamline" {
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.streamline.key_name
-  #subnet_id                   = data.aws_subnet.streamline.id
   user_data_base64            = base64encode(file("${path.module}/cloud-init/cloud-config.tpl"))
   security_groups      = [aws_security_group.streamline.name]
 
