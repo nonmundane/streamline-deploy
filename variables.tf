@@ -6,16 +6,6 @@ variable "domainname" {
   type    = string
   default = "pookflix.com"
 }
-variable "instance_ami" {
-  description = "The AMI to use to launch the Streamline instance"
-  type        = string
-  default     = ""
-}
-
-variable "instance_public_dns" {
-  type    = string
-  default = ""
-}
 
 variable "aws_region" {
   default = "us-west-2"
