@@ -8,8 +8,6 @@ to act as your origin server)
 ## Deploy
 This Terraform assumes you already have the following setup in your AWS account:
 
-* VPC
-* Subnets
 * An AWS API key & secret key for Terraform to use to talk to the AWS API
 * A DNS domain setup in Route53 to get a Zone ID for
 
@@ -35,6 +33,14 @@ dns_record = streamline.FOO.BAR
 
 id = RANDOM_UUID_STRING <--- this is used as the Stream Key and Admin Password for MovieNight
 
-private_key = ssh_streamline.FOOR.BAR.pem file in repo directory
+private_key = ssh_key.pem file in repo directory
 
 public_ip = ZZZ.ZZZ.ZZZ.ZZZ
+
+## Post Setup
+
+Run `./scripts/post.sh`
+
+This will generate utility scripts for ssh and sftp to the host. 
+
+Use `./scripts/sftp.sh` to upload your encoded movie, then `./scripts/ssh.sh` and `./playout-mpd.sh <my_encoded_video.mp4>` to start your stream.
