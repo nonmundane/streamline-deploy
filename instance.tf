@@ -78,7 +78,15 @@ resource "aws_instance" "streamline" {
 resource "aws_route53_record" "streamline" {
   zone_id = data.aws_route53_zone.selected.zone_id
   name    = "${var.hostname}.${data.aws_route53_zone.selected.name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = ["${aws_cloudfront_distribution.streamline_distribution.domain_name}"]
+}
+
+resource "aws_route53_record" "streamline_instance" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = "streamline_instance.${data.aws_route53_zone.selected.name}"
   type    = "A"
   ttl     = "300"
-  records = ["${local.public_ip}"]
+  records = ["${aws_spot_instance_request.streamline[0].public_ip}"]
 }

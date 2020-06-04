@@ -5,7 +5,7 @@ locals {
 
 resource "aws_cloudfront_distribution" "streamline_distribution" {
   origin {
-    domain_name = local.domain_name
+    domain_name = aws_route53_record.streamline_instance.fqdn
     origin_id   = "${local.origin_id}-${local.domain_name}"
     custom_header {
       name  = "Access-Control-Allow-Origin"
@@ -14,8 +14,8 @@ resource "aws_cloudfront_distribution" "streamline_distribution" {
     custom_origin_config {
       http_port                = "80"
       https_port               = "443"
-      origin_protocol_policy   = "http-only"
-      origin_ssl_protocols     = ["TLSv1"]
+      origin_protocol_policy   = "match-viewer"
+      origin_ssl_protocols     = ["TLSv1.1", "TLSv1.2"]
       origin_keepalive_timeout = "5"
       origin_read_timeout      = "30"
     }
