@@ -1,10 +1,10 @@
 variable "hostname" {
   type    = string
-  default = "streamy"
+  default = ""
 }
 variable "domainname" {
   type    = string
-  default = "pookflix.com"
+  default = ""
 }
 
 variable "aws_region" {
