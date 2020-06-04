@@ -2,7 +2,7 @@ resource "aws_security_group" "streamline" {
   name                   = "streamline"
   description            = "Allow SSH and streaming ports open"
   revoke_rules_on_delete = true
-  vpc_id                 = var.vpc_id
+  #vpc_id                 = var.vpc_id
 
   # SSH access from anywhere
   ingress {

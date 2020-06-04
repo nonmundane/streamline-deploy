@@ -1,3 +1,11 @@
+variable "hostname" {
+  type    = string
+  default = "streamy"
+}
+variable "domainname" {
+  type    = string
+  default = "pookflix.com"
+}
 variable "instance_ami" {
   description = "The AMI to use to launch the Streamline instance"
   type        = string
@@ -10,16 +18,12 @@ variable "instance_public_dns" {
 }
 
 variable "aws_region" {
-  default = ""
+  default = "us-west-2"
 }
 
 variable "instance_type" {
   # this app is network sensitive primarily, a t3.small should run it fine
-  default = ""
-}
-
-variable "vpc_id" {
-  default = ""
+  default = "t3.medium"
 }
 
 variable "instance_spot" {

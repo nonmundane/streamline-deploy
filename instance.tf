@@ -1,7 +1,7 @@
 locals {
   vars = {
     stream_key = "${random_uuid.streamline.result}"
-    hostname   = "streamline"
+    hostname   = "${var.hostname}"
     domainname = "${data.aws_route53_zone.selected.name}"
     path       = path.module
   }
@@ -26,9 +26,9 @@ resource "aws_spot_instance_request" "streamline" {
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.streamline.key_name
-  subnet_id                   = data.aws_subnet.streamline.id
+  #subnet_id                   = data.aws_subnet.streamline.id
   user_data_base64            = base64encode(templatefile("${path.module}/cloud-init/cloud-config.tpl", local.vars))
-  vpc_security_group_ids      = [aws_security_group.streamline.id]
+  security_groups      = [aws_security_group.streamline.name]
 
   root_block_device {
     volume_type           = "gp2"
@@ -52,9 +52,9 @@ resource "aws_instance" "streamline" {
   associate_public_ip_address = true
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.streamline.key_name
-  subnet_id                   = data.aws_subnet.streamline.id
+  #subnet_id                   = data.aws_subnet.streamline.id
   user_data_base64            = base64encode(file("${path.module}/cloud-init/cloud-config.tpl"))
-  vpc_security_group_ids      = [aws_security_group.streamline.id]
+  security_groups      = [aws_security_group.streamline.name]
 
   root_block_device {
     volume_type           = "gp2"
@@ -79,7 +79,7 @@ resource "aws_instance" "streamline" {
 
 resource "aws_route53_record" "streamline" {
   zone_id = data.aws_route53_zone.selected.zone_id
-  name    = "streamline.${data.aws_route53_zone.selected.name}"
+  name    = "${var.hostname}.${data.aws_route53_zone.selected.name}"
   type    = "A"
   ttl     = "300"
   records = ["${local.public_ip}"]

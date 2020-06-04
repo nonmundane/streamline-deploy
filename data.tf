@@ -15,12 +15,8 @@ data "aws_ami" "streamline" {
 }
 
 data "aws_route53_zone" "selected" {
-  name         = "FOO.BAR"
+  name         = var.domainname
   private_zone = false
-}
-
-data "aws_subnet" "streamline" {
-  id = "subnet-XXXXXXXX"
 }
 
 resource "random_uuid" "streamline" {}

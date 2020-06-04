@@ -1,6 +1,6 @@
 locals {
   origin_id       = "Custom-Dongs"
-  domain_name     = "streamline.nonmundane.org"
+  domain_name     = "${var.hostname}.${var.domainname}"
 }
 
 resource "aws_cloudfront_distribution" "streamline_distribution" {

@@ -26,7 +26,7 @@ ffmpeg \
     -map 0:a \
     -c:a:0 aac \
     -b:a 128k \
-    -t 60 \
+    -t 30 \
     -movflags faststart \
     ${2}.mp4
 

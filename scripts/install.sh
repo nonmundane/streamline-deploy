@@ -22,6 +22,8 @@ sudo make -C /opt/MovieNight/
 sudo sed -i "s/STREAM_KEY/$STREAM_KEY/g" /home/ubuntu/settings.json /home/ubuntu/movienight.service
 sudo cp /opt/MovieNight/settings.json /opt/MovieNight/settings.json.orig
 sudo cp /home/ubuntu/settings.json /opt/MovieNight/settings.json
+sudo sed -i "s/HOSTNAME/$HOSTNAME/g" /home/ubuntu/video-hls.js 
+sudo sed -i "s/DOMAINNAME/$DOMAINNAME/g" /home/ubuntu/video-hls.js
 sudo cp /home/ubuntu/video-hls.js /opt/MovieNight/static/js/video-hls.js
 sudo cp /opt/MovieNight/static/main.html /opt/MovieNight/static/main.html.orig
 sudo sed -i "s/flv.min.js/hls.min.js/g" /opt/MovieNight/static/main.html
@@ -42,3 +44,4 @@ sudo cp /home/ubuntu/movienight.conf /etc/nginx/sites-available/movienight.conf
 sudo ln -s /etc/nginx/sites-available/movienight.conf /etc/nginx/sites-enabled/movienight.conf
 sudo systemctl reload nginx
 echo "Nginx and ACME SSL part completed"
+sudo chown -R ubuntu:ubuntu /home/ubuntu

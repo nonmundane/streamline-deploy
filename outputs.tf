@@ -29,7 +29,7 @@ output "dns_record" {
 
 output "private_key" {
   description = "The unique private key for the launched instance"
-  sensitive   = true
+  sensitive   = false
   value       = tls_private_key.streamline.private_key_pem
 }
 
