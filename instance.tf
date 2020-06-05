@@ -2,7 +2,7 @@ locals {
   vars = {
     stream_key = "${random_uuid.streamline.result}"
     hostname   = "${var.hostname}"
-    domainname = "${data.aws_route53_zone.selected.name}"
+    domainname = "${var.domainname}"
     path       = path.module
     instance_name = var.instance_name
   }

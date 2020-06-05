@@ -8,7 +8,7 @@ variable "bucket" {
 }
 variable "instance_type" {
   # this app is network sensitive primarily, a t3.small should run it fine
-  default = "t3.micro"
+  default = "t3.small"
 }
 variable "hostname" {
   type    = string

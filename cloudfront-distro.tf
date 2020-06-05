@@ -31,7 +31,10 @@ resource "aws_cloudfront_distribution" "streamline_distribution" {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "${local.origin_id}-${local.domain_name}"
-
+    min_ttl                = 0
+    default_ttl            = 30
+    max_ttl                = 30
+    compress               = true
     forwarded_values {
       query_string = false
       headers      = ["*"]
